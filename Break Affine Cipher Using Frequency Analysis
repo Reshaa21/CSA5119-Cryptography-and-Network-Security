@@ -1,0 +1,20 @@
+def mod_inverse(a, m):
+    for i in range(m):
+        if (a * i) % m == 1:
+            return i
+    return None
+
+def affine_decrypt(cipher, a, b):
+    a_inv = mod_inverse(a, 26)
+    plain = ''
+    for ch in cipher.upper():
+        if ch.isalpha():
+            plain += chr((a_inv * ((ord(ch) - 65 - b + 26)) % 26) + 65)
+        else:
+            plain += ch
+    return plain
+
+# Example using guessed a, b values (from freq analysis)
+cipher = "UBBAZ"
+a, b = 5, 8
+print("Decrypted:", affine_decrypt(cipher, a, b))
