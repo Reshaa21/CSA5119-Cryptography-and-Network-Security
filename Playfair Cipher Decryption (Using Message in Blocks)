@@ -1,0 +1,21 @@
+def playfair_decrypt(cipher, key):
+    matrix = prepare_key_matrix(key)
+    cipher = cipher.replace(" ", "").upper().replace("J", "I")
+    result = ""
+    i = 0
+    while i < len(cipher):
+        a = cipher[i]
+        b = cipher[i+1] if i+1 < len(cipher) else 'X'
+        i += 2
+        row1, col1 = find_position(matrix, a)
+        row2, col2 = find_position(matrix, b)
+        if row1 == row2:
+            result += matrix[row1][(col1 - 1) % 5] + matrix[row2][(col2 - 1) % 5]
+        elif col1 == col2:
+            result += matrix[(row1 - 1) % 5][col1] + matrix[(row2 - 1) % 5][col2]
+        else:
+            result += matrix[row1][col2] + matrix[row2][col1]
+    return result
+
+cipher = "KXJEYUREBEZWEHEWRYTUHEYFS"  # sample only
+print("Decrypted:", playfair_decrypt(cipher, "KEYWORD"))
