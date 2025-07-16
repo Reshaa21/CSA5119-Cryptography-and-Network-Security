@@ -1,0 +1,18 @@
+def affine_ctr_encrypt(plaintext, a, b, nonce):
+    cipher = []
+    for i, byte in enumerate(plaintext):
+        keystream = (a * (nonce + i) + b) % 256
+        cipher.append(byte ^ keystream)
+    return cipher
+
+def affine_ctr_decrypt(ciphertext, a, b, nonce):
+    return affine_ctr_encrypt(ciphertext, a, b, nonce)  # Symmetric
+
+# Example
+pt = [1, 2, 4]
+nonce = 0
+a, b = 5, 8
+cipher = affine_ctr_encrypt(pt, a, b, nonce)
+print("Encrypted:", cipher)
+decrypted = affine_ctr_decrypt(cipher, a, b, nonce)
+print("Decrypted:", decrypted)
