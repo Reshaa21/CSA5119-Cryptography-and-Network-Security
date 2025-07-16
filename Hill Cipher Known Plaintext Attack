@@ -1,0 +1,17 @@
+import numpy as np
+
+def known_plaintext_attack(plain_blocks, cipher_blocks):
+    P = np.array(plain_blocks).reshape(2, 2)
+    C = np.array(cipher_blocks).reshape(2, 2)
+    try:
+        P_inv = np.linalg.inv(P) % 26
+        K = np.dot(C, P_inv) % 26
+        print("Recovered Key Matrix:\n", K)
+    except:
+        print("Matrix not invertible in mod 26")
+        
+# Example: plaintext "HELP" and ciphertext "RIJV" (hypothetical blocks)
+plain = [[7, 4], [11, 15]]  # H=7, E=4, L=11, P=15
+cipher = [[17, 8], [9, 21]]  # R=17, I=8, J=9, V=21
+
+known_plaintext_attack(plain, cipher)
