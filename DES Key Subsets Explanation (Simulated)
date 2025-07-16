@@ -1,0 +1,6 @@
+def des_subkey_structure():
+    print("In DES, 56-bit key is split into two 28-bit halves.")
+    print("Each subkey gets 24 bits from left half and 24 bits from right half (after shifting).")
+    print("Subkeys K1 to K16 are generated using left circular shifts per round.")
+
+des_subkey_structure()
