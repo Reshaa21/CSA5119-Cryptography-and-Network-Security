@@ -1,0 +1,29 @@
+def affine_cbc_encrypt(plaintext_bytes, a, b, iv):
+    ciphertext = []
+    prev = iv
+    for byte in plaintext_bytes:
+        block = byte ^ prev  # XOR with IV or previous block
+        cipher_byte = (a * block + b) % 256
+        ciphertext.append(cipher_byte)
+        prev = cipher_byte
+    return ciphertext
+
+def affine_cbc_decrypt(ciphertext_bytes, a, b, iv):
+    a_inv = pow(a, -1, 256)
+    plaintext = []
+    prev = iv
+    for byte in ciphertext_bytes:
+        decrypted = (a_inv * (byte - b)) % 256
+        plain_byte = decrypted ^ prev
+        plaintext.append(plain_byte)
+        prev = byte
+    return plaintext
+
+# Example
+pt = [0x00, 0x01, 0x02, 0x03]
+iv = 0xAA
+a, b = 5, 8
+cipher = affine_cbc_encrypt(pt, a, b, iv)
+print("Encrypted:", cipher)
+decrypted = affine_cbc_decrypt(cipher, a, b, iv)
+print("Decrypted:", decrypted)
