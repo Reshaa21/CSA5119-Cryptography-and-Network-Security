@@ -1,0 +1,7 @@
+def explain_padding():
+    print("In ECB, CBC, CFB modes, plaintext must be a multiple of block size.")
+    print("Common padding: 1 bit followed by 0s to fill the block.")
+    print("Even if block is full, padding is added to distinguish message boundaries.")
+    print("Good practice: always add a padding block for consistency.")
+
+explain_padding()
