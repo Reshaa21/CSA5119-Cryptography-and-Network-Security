@@ -1,0 +1,25 @@
+def otp_encrypt(text, key_stream):
+    result = ''
+    for i, ch in enumerate(text.upper()):
+        if ch.isalpha():
+            shift = key_stream[i % len(key_stream)]
+            result += chr((ord(ch) - 65 + shift) % 26 + 65)
+        else:
+            result += ch
+    return result
+
+def otp_decrypt(cipher, key_stream):
+    result = ''
+    for i, ch in enumerate(cipher.upper()):
+        if ch.isalpha():
+            shift = key_stream[i % len(key_stream)]
+            result += chr((ord(ch) - 65 - shift + 26) % 26 + 65)
+        else:
+            result += ch
+    return result
+
+plain = "SENDMOREMONEY"
+key_stream = [9,0,1,7,23,15,21,14,11,11,2,8,9]
+cipher = otp_encrypt(plain, key_stream)
+print("Encrypted:", cipher)
+print("Decrypted:", otp_decrypt(cipher, key_stream))
