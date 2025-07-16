@@ -1,0 +1,29 @@
+def mono_encrypt(plain, key_map):
+    result = ""
+    for ch in plain.upper():
+        if ch.isalpha():
+            result += key_map[ord(ch) - 65]
+        else:
+            result += ch
+    return result
+
+def mono_decrypt(cipher, key_map):
+    reverse_map = [''] * 26
+    for i, ch in enumerate(key_map):
+        reverse_map[ord(ch) - 65] = chr(i + 65)
+    result = ""
+    for ch in cipher:
+        if ch.isalpha():
+            result += reverse_map[ord(ch.upper()) - 65]
+        else:
+            result += ch
+    return result
+
+# Example
+key = "QWERTYUIOPASDFGHJKLZXCVBNM"
+text = "HELLO"
+encrypted = mono_encrypt(text, key)
+decrypted = mono_decrypt(encrypted, key)
+
+print("Encrypted:", encrypted)
+print("Decrypted:", decrypted)
