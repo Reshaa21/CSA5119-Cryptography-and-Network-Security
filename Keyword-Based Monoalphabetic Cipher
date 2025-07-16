@@ -1,0 +1,29 @@
+def generate_cipher_alphabet(keyword):
+    keyword = keyword.upper()
+    result = ""
+    used = set()
+    for ch in keyword:
+        if ch not in used and ch.isalpha():
+            result += ch
+            used.add(ch)
+    for ch in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        if ch not in used:
+            result += ch
+    return result
+
+def encrypt_keyword_mono(text, cipher_alpha):
+    result = ""
+    for ch in text.upper():
+        if ch.isalpha():
+            result += cipher_alpha[ord(ch) - 65]
+        else:
+            result += ch
+    return result
+
+keyword = "CIPHER"
+cipher_alpha = generate_cipher_alphabet(keyword)
+plain = "ATTACK"
+cipher = encrypt_keyword_mono(plain, cipher_alpha)
+
+print("Cipher Alphabet:", cipher_alpha)
+print("Encrypted:", cipher)
