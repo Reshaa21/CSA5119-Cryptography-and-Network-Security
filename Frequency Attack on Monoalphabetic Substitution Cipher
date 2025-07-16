@@ -1,0 +1,23 @@
+from collections import Counter
+
+def frequency_attack_mono(cipher):
+    # Count frequencies
+    freq = Counter(cipher)
+    sorted_freq = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+    
+    english_freq_order = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+    cipher_chars = [item[0] for item in sorted_freq if item[0].isalpha()]
+    
+    mapping = dict(zip(cipher_chars, english_freq_order))
+    
+    result = ''
+    for ch in cipher:
+        if ch.upper() in mapping:
+            result += mapping[ch.upper()]
+        else:
+            result += ch
+    return result
+
+# Example (adjust text and mapping manually if needed)
+cipher = "ZEBRAS"  # Assume monoalphabetic
+print("Approximate Decryption:", frequency_attack_mono(cipher))
