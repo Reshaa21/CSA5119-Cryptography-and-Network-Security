@@ -1,0 +1,24 @@
+def decrypt_custom_substitution(cipher, mapping):
+    plain = ''
+    for ch in cipher:
+        if ch.upper() in mapping:
+            plain += mapping[ch.upper()]
+        else:
+            plain += ch
+    return plain
+
+# Example: guessed mapping (partial)
+example_mapping = {
+    '‡': 'E',
+    '†': 'T',
+    ')': 'H',
+    '*': 'A',
+    ';': 'O',
+    '(': 'N',
+    '5': 'R',
+    '8': 'S'
+    # Add more as needed
+}
+
+cipher = "53‡‡†305))6*;4826)4‡.)"
+print("Decrypted guess:", decrypt_custom_substitution(cipher, example_mapping))
