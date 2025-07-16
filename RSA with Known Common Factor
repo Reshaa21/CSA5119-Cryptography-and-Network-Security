@@ -1,0 +1,15 @@
+from math import gcd
+
+def check_common_factor_attack(n, known_plain_block):
+    # Example common factor (for demonstration)
+    common = gcd(n, known_plain_block)
+    if common > 1:
+        print("Common factor found:", common)
+        print("n is factorable → RSA is broken!")
+    else:
+        print("No common factor with known plaintext block.")
+
+# Example
+n = 3233  # Normally pq
+known_block = 61
+check_common_factor_attack(n, known_block)
