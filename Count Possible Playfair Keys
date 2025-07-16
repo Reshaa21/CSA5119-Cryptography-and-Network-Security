@@ -1,0 +1,8 @@
+import math
+
+def total_playfair_keys():
+    total = math.factorial(25)  # 25 letters, treating I/J as same
+    print("Total possible Playfair keys (25!):", total)
+    print("Effective keys are fewer due to equivalent keys producing same encryption.")
+
+total_playfair_keys()
