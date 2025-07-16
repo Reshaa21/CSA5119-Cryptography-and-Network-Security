@@ -1,0 +1,22 @@
+def caesar_encrypt(text, key):
+    result = ""
+    for char in text:
+        if char.isupper():
+            result += chr((ord(char) - 65 + key) % 26 + 65)
+        elif char.islower():
+            result += chr((ord(char) - 97 + key) % 26 + 97)
+        else:
+            result += char
+    return result
+
+def caesar_decrypt(text, key):
+    return caesar_encrypt(text, 26 - key)
+
+# Example
+plain = "HELLO"
+key = 3
+encrypted = caesar_encrypt(plain, key)
+decrypted = caesar_decrypt(encrypted, key)
+
+print("Encrypted:", encrypted)
+print("Decrypted:", decrypted)
