@@ -1,0 +1,24 @@
+def vigenere_encrypt(plain, key):
+    plain = plain.upper()
+    key = key.upper()
+    key_full = (key * ((len(plain) // len(key)) + 1))[:len(plain)]
+    encrypted = ''
+    for p, k in zip(plain, key_full):
+        encrypted += chr(((ord(p) - 65 + ord(k) - 65) % 26) + 65)
+    return encrypted
+
+def vigenere_decrypt(cipher, key):
+    cipher = cipher.upper()
+    key = key.upper()
+    key_full = (key * ((len(cipher) // len(key)) + 1))[:len(cipher)]
+    decrypted = ''
+    for c, k in zip(cipher, key_full):
+        decrypted += chr(((ord(c) - ord(k) + 26) % 26) + 65)
+    return decrypted
+
+# Example
+plain = "ATTACKATDAWN"
+key = "LEMON"
+cipher = vigenere_encrypt(plain, key)
+print("Encrypted:", cipher)
+print("Decrypted:", vigenere_decrypt(cipher, key))
