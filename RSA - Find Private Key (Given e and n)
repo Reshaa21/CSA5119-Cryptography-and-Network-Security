@@ -1,0 +1,23 @@
+def rsa_private_key(e, n):
+    # Factor n
+    for p in range(2, n):
+        if n % p == 0:
+            q = n // p
+            break
+    phi = (p - 1) * (q - 1)
+
+    # Extended Euclidean Algorithm
+    def egcd(a, b):
+        if a == 0:
+            return b, 0, 1
+        g, y, x = egcd(b % a, a)
+        return g, x - (b // a) * y, y
+
+    gcd, x, _ = egcd(e, phi)
+    d = x % phi
+    return p, q, phi, d
+
+# Example: e=31, n=3599
+e, n = 31, 3599
+p, q, phi, d = rsa_private_key(e, n)
+print(f"p={p}, q={q}, phi={phi}, private key d={d}")
