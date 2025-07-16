@@ -1,0 +1,7 @@
+def show_error_propagation():
+    print("In ECB mode: Bit error affects only 1 block.")
+    print("In CBC mode: Bit error in Ci affects Pi and Pi+1.")
+    print("Bit error in P1 causes changes in C1 (directly), and C2 (because it depends on C1).")
+    print("Beyond P2, data is not affected.")
+
+show_error_propagation()
