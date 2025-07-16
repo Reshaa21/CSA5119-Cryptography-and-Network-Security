@@ -1,0 +1,14 @@
+def generate_des_keys(base_key):
+    # Simulate 16 keys (shifts omitted for simplicity)
+    keys = [f"Key{i+1}" for i in range(16)]
+    return keys
+
+def reverse_keys_for_decryption(keys):
+    return keys[::-1]
+
+# Example
+keys = generate_des_keys("101010...")
+reversed_keys = reverse_keys_for_decryption(keys)
+print("Decryption Key Order:")
+for i, k in enumerate(reversed_keys):
+    print(f"Round {i+1}: {k}")
