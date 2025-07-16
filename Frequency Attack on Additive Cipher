@@ -1,0 +1,17 @@
+def frequency_attack(ciphertext):
+    results = []
+    for key in range(26):
+        decrypted = ''
+        for ch in ciphertext.upper():
+            if ch.isalpha():
+                decrypted += chr(((ord(ch) - 65 - key + 26) % 26) + 65)
+            else:
+                decrypted += ch
+        results.append((key, decrypted))
+    return results
+
+cipher = "ZEBRAS"
+top_results = frequency_attack(cipher)
+print("Top 10 Guesses:")
+for k, d in top_results[:10]:
+    print(f"Key {k}: {d}")
